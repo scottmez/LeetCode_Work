@@ -1,0 +1,84 @@
+class Solution {
+public:
+    string intToRoman(int num) {
+        stack<string> s;
+        int copy = num; 
+        unsigned i;
+        
+        //one's place
+        num = num % 10;
+        if (num < 4) {
+            for (i = 0; i < num; ++i) {
+                s.push("I");
+            }
+        }
+        else if (num == 4) {
+            s.push("IV");
+        }
+        else if (num > 4 && num < 9) {
+            for (i = 0; i < num - 5; ++i) {
+                s.push("I");
+            }
+            s.push("V");
+        }
+        else {
+            s.push("IX");
+        }
+        
+        //tens place
+        num = copy / 10;
+        num = num % 10;
+        if (num < 4) {
+            for (i = 0; i < num; ++i) {
+                s.push("X");
+            }
+        }
+        else if (num == 4) {
+            s.push("XL");
+        }
+        else if (num > 4 && num < 9) {
+            for (i = 0; i < num - 5; ++i) {
+                s.push("X");
+            }
+            s.push("L");
+        }
+        else {
+            s.push("XC");
+        }
+        
+        //hundreds place
+        num = copy / 100;
+        num = num % 10;
+        if (num < 4) {
+            for (i = 0; i < num; ++i) {
+                s.push("C");
+            }
+        }
+        else if (num == 4) {
+            s.push("CD");
+        }
+        else if (num > 4 && num < 9) {
+            for (i = 0; i < num - 5; ++i) {
+                s.push("C");
+            }
+            s.push("D");
+        }
+        else {
+            s.push("CM");
+        }
+        
+        //thousands place
+        num = copy / 1000;
+        for (i = 0; i < num; ++i) {
+            s.push("M");
+        }
+        
+        string result = "";
+        while (s.size() > 0) {
+            result = result + s.top();
+            s.pop();
+        }
+        
+        return result;
+    }
+};
