@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int numTrees(int n) {
+        /*if...
+        1 -> 1
+        2 -> 2
+        3 -> 5
+        4 -> 14
+        5 -> 
+        */
+        if (n < 3) {
+            return n;
+        }
+        else {
+            int trees[n + 1];
+            trees[0] = 1;
+            trees[1] = 1; 
+            for (unsigned i = 2;i <= n; i++) {
+                trees[i] = 0;
+                for (unsigned j = 0; j < i; j++) {
+                    trees[i] += trees[j] * trees[i - j - 1];
+                } 
+            }
+            return trees[n];
+        }
+         
+    }
+};
