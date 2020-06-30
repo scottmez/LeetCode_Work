@@ -1,0 +1,46 @@
+class Solution {
+public:
+        //times going right = (m - 1)
+        //times going down = (n - 1)
+        /*what we know: 
+        if m or n are 1 then the number of paths is 1
+        3x2 => 3 paths
+        3x3 => 6 paths
+        1st theory:
+        if n or m == 1 return mxn
+        else subtract 1 from smallest int and return product
+        incorrect!
+        7x3 => 28, not 14
+        
+        could write a recursive function that adds up the number of paths if you go down and if you go right
+        This works but it takes too long
+        failed on 51x9 specifically
+        tried 30x9 on recursive method and got 38,608,020 paths which was correct
+        2x2 => 2, 3x2 => 3, 4x2 => 4
+        3x3 => 6, 4x3 => 10, 5x3 => 15, 6x3 => 21
+        4x4 => 20, 5x4 => 35, 6x4 => 56, 7x4 => 84, 8x4 => 120 
+        5x5 => 70, 6x5 => 126, 7x5 => 210, 8x5 => 330 
+        6x6 => 252
+        7x7 => 924
+        */
+    
+    int uniquePaths(int m, int n) { 
+        return uniquePathsRecurse(m,n);
+    }
+    
+    int uniquePathsRecurse(int m, int n) {
+        if (m == 1 || n == 1) {
+            return 1;
+        }
+        else if (m == 2 || n == 2) {
+            return m*n/2;          
+        }
+        else {
+            return uniquePathsRecurse(m - 1, n) + uniquePathsRecurse(m, n - 1);
+        }
+    }
+    
+//     int uniquePaths(int m, int n) { 
+        
+//     }
+};
