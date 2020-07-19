@@ -1,0 +1,56 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        //make the strings the same size
+        if (a.size() != b.size()) {
+            if (a.size() > b.size()) {
+                while (a.size() > b.size()) {
+                     b = "0" + b;  
+                }
+            }
+            else {
+                while (b.size() > a.size()) {
+                    a = "0" + a;
+                }
+            }
+        }
+        
+        //analyze bit by bit and add
+        bool remainder = false; //will be set to true if there is a remainder needing to be added
+        string result = "";
+        for (unsigned i = a.size() - 1; i + 1 != 0; i--) {
+            if (a.at(i) == '1' && a.at(i) == b.at(i)) {
+                if (remainder) {
+                    result = "1" + result; 
+                }
+                else {
+                    result = "0" + result;
+                }
+                remainder = true;
+            }
+            else if (a.at(i) == '1' || b.at(i) == '1') {
+                if (remainder) {
+                    result = "0" + result;
+                    remainder = true;
+                }
+                else {
+                    result = "1" + result;
+                    remainder = false;
+                }
+            }
+            else {
+                if (remainder) {
+                    result = "1" + result;
+                }
+                else {
+                    result = "0" + result;
+                }
+                remainder = false;
+            }
+        }
+        if (remainder) {
+            result = "1" + result;
+        }
+        return  result;
+    }
+};
